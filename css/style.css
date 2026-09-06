@@ -1,0 +1,324 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #f3efe9;
+    /* Насыщенный кремовый фон для боковин */
+    margin: 0;
+    padding: 40px 20px 0px 20px;
+    /* Отступы сверху и снизу */
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    /* Белоснежная подложка для самого рецепта */
+    padding: 12px 50px 40px;
+    /* Внутренние отступы, чтобы текст не прижимался к краям */
+    border-radius: 12px;
+    /* Мягкие скругленные углы у страницы */
+    box-shadow: 0 10px 30px rgba(44, 26, 17, 0.05);
+    /* Едва заметная кофейная тень */
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+h1 {
+    font-family: "Georgia", serif;
+    font-size: 2.6rem;
+    text-align: center;
+    color: #2c1a11;
+    margin-bottom: 30px;
+    border-bottom: 3px double #daa987;
+    /* Двойная карамельная линия */
+    padding-bottom: 15px;
+}
+
+h1 {
+    display: flex;
+    /* Включаем режим гибких контейнеров */
+    align-items: center;
+    /* Выравниваем текст и ромбики строго по центру высоты */
+    justify-content: center;
+    /* Центрируем заголовок по горизонтали (если нужно) */
+}
+
+h1::before {
+    content: "♦";
+    margin-right: 15px;
+    color: #daa987;
+    font-size: 1.75rem;
+    /* vertical-align: middle; — больше не нужно, удалите */
+}
+
+h1::after {
+    content: "♦";
+    margin-left: 15px;
+    color: #daa987;
+    font-size: 1.75rem;
+    /* vertical-align: middle; — больше не нужно, удалите */
+}
+
+/* Настройки для самого заголовка, чтобы анимация работала плавно */
+h1::before,
+h1::after {
+    display: inline-block;
+    /* Позволяет символам вращаться */
+    transition: transform 0.4s ease-in-out;
+    /* Плавность вращения (0.4 секунды) */
+}
+
+/* Эффект при наведении мыши на заголовок h1 */
+h1:hover::before {
+    transform: rotate(180deg);
+    /* Поворот левой звёздочки на 180 градусов */
+}
+
+h1:hover::after {
+    transform: rotate(-180deg);
+    /* Поворот правой звёздочки в обратную сторону */
+}
+
+h2 {
+    color: #d2691e;
+    border-bottom: 2px solid #f0e4d4;
+    padding-bottom: 5px;
+}
+
+/* Превращаем figure в гибкую галерею для картинок */
+.gallery-track {
+    margin: 20px -40px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    /* Отступы между картинками */
+}
+
+/* Стили для самих изображений */
+.gallery-track img {
+    flex: 1 1 200px;
+    /* Картинки будут подстраиваться под размер экрана */
+    max-width: 100%;
+    height: 280px;
+    /* Одинаковая высота для всех картинок */
+    object-fit: cover;
+    /* Защищает фото от искажения пропорций */
+    border-radius: 8px;
+    /* Слегка скругленные углы */
+}
+
+/* Подпись к картинкам */
+figcaption {
+    width: 100%;
+    /* Подпись всегда будет снизу под картинками */
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Шаг 1: Готовим картинки к анимации */
+.gallery-track img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+    /* Плавность эффекта (0.3 секунды) */
+    cursor: pointer;
+    /* Меняет курсор на палец, показывая, что элемент интерактивен */
+}
+
+/* Шаг 2: Эффект при наведении мыши на конкретную картинку */
+.gallery-track img:hover {
+    transform: scale(1.03);
+    /* Легкое плавное увеличение на 3% */
+    filter: brightness(1.05) contrast(1.05);
+    /* Картинка становится чуть ярче и сочнее */
+}
+
+/* Фоновая подложка модального окна */
+.modal {
+    display: none;
+    /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    /* Поверх всех элементов, включая шапку */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    /* Полупрозрачный черный фон */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Сама увеличенная картинка */
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    /* Картинка не деформируется и влезет в любой экран */
+    border-radius: 4px;
+}
+
+/* Кнопка закрытия (крестик) */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #daa987;
+    /* Ваш персиковый цвет при наведении на крестик */
+}
+
+/* Отступы в списках для удобства чтения */
+li {
+    margin-bottom: 8px;
+}
+
+/* Превращаем каждый ингредиент в аккуратную строчку-плашку */
+ul li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    /* Запрещает выделение текста синим цветом */
+    transition: all 0.2s ease;
+    /* Плавный переход для всех изменений */
+}
+
+/* Эффект при наведении: строчка аккуратно подсвечивается */
+ul li:hover {
+    background-color: #f5ece1;
+    /* Очень мягкий кофейно-кремовый фон */
+    padding-left: 18px;
+    /* Текст интерактивно сдвигается чуть вправо */
+}
+
+/* Этот класс будет добавляться к списку после клика */
+ul li.checked {
+    background-color: #e2edd5;
+    /* Нежно-зеленый цвет */
+    color: #557233;
+    /* Темно-зеленый текст */
+    text-decoration: line-through;
+    /* Текст зачеркивается */
+}
+
+/* Стиль для отмеченных элементов списка */
+.tobuy-list li.checked::marker {
+    content: "✓ ";
+    color: green;
+    font-weight: bold;
+}
+
+.page-footer {
+    color: #8C4F35;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h1::before {
+        margin-right: 5px;
+    }
+
+    h1::after {
+        margin-left: 5px;
+    }
+
+    li {
+        margin-bottom: 12px;
+    }
+
+    /* Уменьшаем внутренние отступы у main */
+    main {
+        padding-left: 30px;
+        padding-right: 26px;
+    }
+
+    /* Убираем левый отступ у li, чтобы список начинался левее */
+    ul li,
+    ol li {
+        padding-left: 6px;
+        margin-left: -10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .slider-gallery {
+        margin: 15px 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Превращаем в горизонтальную линию */
+    .gallery-track {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 10px;
+        padding: 0 75px;
+        /* Отступы по бокам, чтобы видеть края соседних фото */
+        overflow-x: hidden;
+        /* Включаем горизонтальную прокрутку */
+        scroll-behavior: smooth;
+        /* Плавный скролл при клике */
+        -webkit-overflow-scrolling: touch;
+        /* Плавный скролл на iOS */
+        user-select: none;
+    }
+
+    /* Скрываем стандартную полосу прокрутки для красоты */
+    .gallery-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gallery-track img {
+        flex: 0 0 95%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 1 / 1;
+        border-radius: 16px;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+        scroll-snap-align: center;
+        
+        /* Стили для НЕАКТИВНЫХ (боковых) картинок */
+        opacity: 0.5;
+        transform: scale(0.97); /* Уменьшаем соседние фото */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .gallery-track img:hover {
+        transform: none;
+        filter: none;
+    }
+
+    /* Активная центральная картинка */
+    .gallery-track img.active {
+        opacity: 1;
+        transform: scale(1);
+        /* В фокусе картинка имеет полный размер */
+    }
+}
