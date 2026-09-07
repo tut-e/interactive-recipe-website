@@ -9,8 +9,6 @@ A responsive and interactive single-page website featuring a delicious recipe, b
 
 ## 🚀 Features
 
-## 🚀 Features
-
 * **Adaptive Image Gallery:** Opens images in a full-screen Lightbox modal on desktop, and automatically transforms into a touch-friendly scrollable carousel on mobile devices.
 * **Interactive Ingredients Checklist:** Allows users to dynamically cross out or check off ingredients they already have, making the cooking process easier to track.
 * **Responsive Web Design:** Fully optimized for all screen sizes, from small mobile viewports to large desktop monitors.
@@ -34,8 +32,8 @@ A responsive and interactive single-page website featuring a delicious recipe, b
 ```text
 ├── images/          # Image assets and icons
 ├── index.html       # Main HTML document
-├── js/script.js        # JavaScript for interactive features
-└── css/style.css        # Custom CSS stylesheets
+├── js/script.js     # JavaScript for interactive features
+└── css/style.css    # Custom CSS stylesheets
 ```
 
 ## ✍️ Author
